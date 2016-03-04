@@ -1,12 +1,13 @@
 package uz.alano.warehouse.product;
 
-import org.codehaus.jackson.annotate.*;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+import java.util.GregorianCalendar;
 
 @JsonTypeName("food")
 public class Food extends Product {
     private int calorie;
-    private Date creationDate;
+    private GregorianCalendar creationDate;
     private int expirationTime;
 
     public int getCalorie() {
@@ -21,12 +22,12 @@ public class Food extends Product {
         this.calorie = calorie;
     }
 
-    public Date getCreationDate() {
+    public GregorianCalendar getCreationDate() {
         return this.creationDate;
     }
 
-    public void setCreationDate(Date date) {
-        if (date == null || date.after(new Date())) {
+    public void setCreationDate(GregorianCalendar date) {
+        if (date == null || date.after(GregorianCalendar.getInstance())) {
             throw new IllegalArgumentException();
         }
     }
@@ -43,13 +44,8 @@ public class Food extends Product {
         this.expirationTime = expirationTime;
     }
 
-    @JsonCreator
-    public Food(@JsonProperty("ean") long ean,
-         @JsonProperty("price") double price,
-         @JsonProperty("name") String name,
-         @JsonProperty("calorie") int calorie,
-         @JsonProperty("creationDate") Date creationDate,
-         @JsonProperty("expirationTime") int expirationTime) {
+    public Food(){}
+    public Food(long ean, double price, String name, int calorie, GregorianCalendar creationDate, int expirationTime) {
         super(ean, price, name);
 
         this.calorie = calorie;

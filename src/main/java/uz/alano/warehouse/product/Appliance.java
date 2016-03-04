@@ -1,6 +1,6 @@
 package uz.alano.warehouse.product;
 
-import org.codehaus.jackson.annotate.*;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @JsonTypeName("appliance")
 public class Appliance extends Product {
@@ -18,11 +18,8 @@ public class Appliance extends Product {
         this.inputPower = inputPower;
     }
 
-    @JsonCreator
-    public Appliance(@JsonProperty("ean") long ean,
-              @JsonProperty("price") double price,
-              @JsonProperty("name") String name,
-              @JsonProperty("inputPower") int inputPower) {
+    public Appliance(){}
+    public Appliance(long ean, double price, String name, int inputPower) {
         super(ean, price, name);
         this.inputPower = inputPower;
     }

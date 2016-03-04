@@ -1,12 +1,13 @@
 package uz.alano.warehouse.product;
 
-import org.codehaus.jackson.annotate.*;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.WRAPPER_OBJECT, property="type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value=Appliance.class, name="appliance"),
-        @JsonSubTypes.Type(value=Food.class, name="food"),
-        @JsonSubTypes.Type(value=Clothes.class, name="clothes"),
+        @JsonSubTypes.Type(value = Food.class, name = "food"),
+        @JsonSubTypes.Type(value = Appliance.class, name = "appliance"),
+        @JsonSubTypes.Type(value = Clothes.class, name = "clothes")
 })
 public abstract class Product {
     private long ean;
@@ -49,10 +50,8 @@ public abstract class Product {
         this.name = name;
     }
 
-    @JsonCreator
-    Product(@JsonProperty("ean") long ean,
-            @JsonProperty("price") double price,
-            @JsonProperty("name") String name){
+    Product(){}
+    Product(long ean, double price, String name){
         this.ean = ean;
         this.price = price;
         this.name = name;
