@@ -7,9 +7,13 @@ import uz.alano.warehouse.product.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class Warehouse {
+    static Logger logger = Logger.getLogger(Warehouse.class.getSimpleName());
+
     List<Product> products = new LinkedList<>();
     public List<Product> getProducts() {
         return products;
@@ -101,11 +105,43 @@ public class Warehouse {
         return groupedProducts.toString();
     }
 
+    private static Warehouse createDefaultWarehouse(){
+        Warehouse warehouse = new Warehouse();
+        warehouse.add(new Food(2, 10, "Apple", 10, new GregorianCalendar(2015, 2, 1), 5));
+        warehouse.add(new Food(2, 25, "Potato", 30, new GregorianCalendar(2015, 2, 1), 20));
+        warehouse.add(new Food(3, 50, "Chips", 30, new GregorianCalendar(2014, 4, 22), 30));
+        warehouse.add(new Food(4, 60, "Marshmallow", 20, new GregorianCalendar(2015, 7, 13), 30));
+        warehouse.add(new Food(5, 22, "Bread", 20, new GregorianCalendar(2015, 8, 11), 20));
+        warehouse.add(new Appliance(6, 500, "Mixer", 220));
+        warehouse.add(new Appliance(7, 1000, "Drill", 220));
+        warehouse.add(new Appliance(8, 5000, "TV", 220));
+        warehouse.add(new Appliance(9, 100, "Flashlight", 1));
+        warehouse.add(new Appliance(10, 150, "Charger", 5));
+        warehouse.add(new Clothes(11, 150, "T-Shirt", (byte) 35, "Cotton"));
+        warehouse.add(new Clothes(12, 300, "Bikini", (byte) 55, "Plastic"));
+        warehouse.add(new Clothes(13, 150, "Short", (byte) 33, "Shorts"));
+        warehouse.add(new Clothes(14, 350, "Jeans", (byte) 44, "Denim"));
+        warehouse.add(new Clothes(15, 250, "Pullover", (byte) 35, "Wool"));
+
+        return warehouse;
+    }
+
+    private static Warehouse loadFromFile(String path) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(path, Warehouse.class);
+    }
+
+    private static void saveToFile(Warehouse warehouse, String path) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(new File(path), warehouse);
+    }
+
     public static void main(String[] args) {
         Warehouse warehouse;
         try {
             warehouse = loadFromFile("warehouse.json");
         } catch (IOException e) {
+            logger.log(Level.INFO, "File not found.");
             warehouse = createDefaultWarehouse();
         }
 
@@ -133,39 +169,8 @@ public class Warehouse {
         try {
             saveToFile(warehouse, "warehouse.json");
         } catch (IOException e) {
+            logger.log(Level.WARNING, "Saving to file failed.");
             e.printStackTrace();
         }
     }
-
-    public static Warehouse createDefaultWarehouse(){
-        Warehouse warehouse = new Warehouse();
-        warehouse.add(new Food(2, 10, "Apple", 10, new GregorianCalendar(2015, 2, 1), 5));
-        warehouse.add(new Food(2, 25, "Potato", 30, new GregorianCalendar(2015, 2, 1), 20));
-        warehouse.add(new Food(3, 50, "Chips", 30, new GregorianCalendar(2014, 4, 22), 30));
-        warehouse.add(new Food(4, 60, "Marshmallow", 20, new GregorianCalendar(2015, 7, 13), 30));
-        warehouse.add(new Food(5, 22, "Bread", 20, new GregorianCalendar(2015, 8, 11), 20));
-        warehouse.add(new Appliance(6, 500, "Mixer", 220));
-        warehouse.add(new Appliance(7, 1000, "Drill", 220));
-        warehouse.add(new Appliance(8, 5000, "TV", 220));
-        warehouse.add(new Appliance(9, 100, "Flashlight", 1));
-        warehouse.add(new Appliance(10, 150, "Charger", 5));
-        warehouse.add(new Clothes(11, 150, "T-Shirt", (byte) 35, "Cotton"));
-        warehouse.add(new Clothes(12, 300, "Bikini", (byte) 55, "Plastic"));
-        warehouse.add(new Clothes(13, 150, "Short", (byte) 33, "Shorts"));
-        warehouse.add(new Clothes(14, 350, "Jeans", (byte) 44, "Denim"));
-        warehouse.add(new Clothes(15, 250, "Pullover", (byte) 35, "Wool"));
-
-        return warehouse;
-    }
-
-    public static Warehouse loadFromFile(String path) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(path, Warehouse.class);
-    }
-
-    public static void saveToFile(Warehouse warehouse, String path) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(new File(path), warehouse);
-    }
-
 }
