@@ -1,4 +1,4 @@
-package warehouse;
+package uz.alano.warehouse.product;
 
 import org.codehaus.jackson.annotate.*;
 
@@ -28,7 +28,7 @@ public class Clothes extends Product {
     }
 
     @JsonCreator
-    Clothes(@JsonProperty("ean") long ean,
+    public Clothes(@JsonProperty("ean") long ean,
             @JsonProperty("price") double price,
             @JsonProperty("name") String name,
             @JsonProperty("size") byte size,

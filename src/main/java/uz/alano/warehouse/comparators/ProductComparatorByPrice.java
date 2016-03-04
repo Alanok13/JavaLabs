@@ -1,6 +1,7 @@
-package warehouse.comparators;
+package uz.alano.warehouse.comparators;
 
-import warehouse.Product;
+import uz.alano.warehouse.product.Product;
+
 import java.util.Comparator;
 
 public class ProductComparatorByPrice implements Comparator<Product> {

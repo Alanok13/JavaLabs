@@ -1,6 +1,7 @@
-package warehouse.comparators;
+package uz.alano.warehouse.comparators;
 
-import warehouse.Food;
+import uz.alano.warehouse.product.Food;
+
 import java.util.Comparator;
 
 public class FoodComparatorByCalorie implements Comparator<Food> {

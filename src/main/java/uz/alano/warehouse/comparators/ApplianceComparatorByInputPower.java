@@ -1,6 +1,7 @@
-package warehouse.comparators;
+package uz.alano.warehouse.comparators;
 
-import warehouse.Appliance;
+import uz.alano.warehouse.product.Appliance;
+
 import java.util.Comparator;
 
 public class ApplianceComparatorByInputPower implements Comparator<Appliance> {

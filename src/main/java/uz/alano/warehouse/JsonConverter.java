@@ -1,4 +1,4 @@
-package warehouse;
+package uz.alano.warehouse;
 
 import org.codehaus.jackson.map.ObjectMapper;
 

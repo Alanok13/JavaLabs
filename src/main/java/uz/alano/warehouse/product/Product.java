@@ -1,4 +1,4 @@
-package warehouse;
+package uz.alano.warehouse.product;
 
 import org.codehaus.jackson.annotate.*;
 

@@ -1,4 +1,4 @@
-package warehouse;
+package uz.alano.warehouse.product;
 
 import org.codehaus.jackson.annotate.*;
 import java.util.Date;
@@ -44,7 +44,7 @@ public class Food extends Product {
     }
 
     @JsonCreator
-    Food(@JsonProperty("ean") long ean,
+    public Food(@JsonProperty("ean") long ean,
          @JsonProperty("price") double price,
          @JsonProperty("name") String name,
          @JsonProperty("calorie") int calorie,

@@ -1,8 +1,10 @@
-package warehouse;
+package uz.alano.warehouse;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import warehouse.comparators.*;
+import uz.alano.warehouse.comparators.*;
+import uz.alano.warehouse.product.*;
+
 
 import java.io.IOException;
 import java.util.*;
