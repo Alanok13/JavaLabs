@@ -27,53 +27,43 @@ public class Warehouse {
         this.products.add(p);
     }
 
-    public String FoodSortedByCalorie() {
-        List<Food> foodList = this.groupProducts().get(Food.class)
-                .stream()
-                .map(p -> (Food) p)
-                .collect(Collectors.toCollection(LinkedList::new));
-
-        foodList.sort(new FoodComparatorByCalorie());
-
-        return foodList.toString();
+    public String foodSortedByCalorie() {
+        return this.sortedProduct(Food.class, new FoodComparatorByCalorie());
     }
 
-    public String AppliancesSortedByInputPower() {
-        List<Appliance> applianceList = this.groupProducts().get(Appliance.class)
+    public String clothesSortedBySize() {
+        return this.sortedProduct(Clothes.class, new ClothesComparatorBySize());
+    }
+
+    public String applianceSortedByInputPower() {
+        return this.sortedProduct(Appliance.class, new ApplianceComparatorByInputPower());
+    }
+
+    public <T extends Product> String sortedProduct(Class<T> cl, Comparator<T> comparator) {
+        List<T> applianceList = this.groupProducts().get(cl)
                 .stream()
-                .map(p -> (Appliance) p)
+                .map(p -> (T) p)
                 .collect(Collectors.toCollection(LinkedList::new));
 
-        applianceList.sort(new ApplianceComparatorByInputPower());
+        applianceList.sort(comparator);
 
         return applianceList.toString();
     }
 
-    public String ClothesSortedBySize() {
-        List<Clothes> clothesList = this.groupProducts().get(Clothes.class)
-                .stream()
-                .map(p -> (Clothes) p)
-                .collect(Collectors.toCollection(LinkedList::new));
-
-        clothesList.sort(new ClothesComparatorBySize());
-
-        return clothesList.toString();
+    public String productsSortedByName() {
+        return this.productsSorted(new ProductComparatorByName());
     }
 
-    public String ProductsSortedByName() {
-        return this.ProductsSorted(new ProductComparatorByName());
+    public String productsSortedByPrice() {
+        return this.productsSorted(new ProductComparatorByPrice());
     }
 
-    public String ProductsSortedByPrice() {
-        return this.ProductsSorted(new ProductComparatorByPrice());
+    public String productsGroupedAndSortedByName() {
+        return this.productsGroupedAndSorted(new ProductComparatorByName());
     }
 
-    public String ProductsGroupedAndSortedByName() {
-        return this.ProductsGroupedAndSorted(new ProductComparatorByName());
-    }
-
-    public String ProductsGroupedAndSortedByPrice() {
-        return this.ProductsGroupedAndSorted(new ProductComparatorByPrice());
+    public String productsGroupedAndSortedByPrice() {
+        return this.productsGroupedAndSorted(new ProductComparatorByPrice());
     }
 
     private Map<Class, List<Product>> groupProducts() {
@@ -89,13 +79,13 @@ public class Warehouse {
         return groupedProducts;
     }
 
-    private String ProductsSorted(Comparator<Product> comparator) {
+    private String productsSorted(Comparator<Product> comparator) {
         this.products.sort(comparator);
 
         return products.toString();
     }
 
-    private String ProductsGroupedAndSorted(Comparator<Product> comparator) {
+    private String productsGroupedAndSorted(Comparator<Product> comparator) {
         Map<Class, List<Product>> groupedProducts = this.groupProducts();
 
         for (List<Product> list : groupedProducts.values()) {
@@ -146,31 +136,30 @@ public class Warehouse {
         }
 
         System.out.println("Sorted by name:");
-        System.out.println(warehouse.ProductsSortedByName());
+        System.out.println(warehouse.productsSortedByName());
 
         System.out.println("Sorted by price:");
-        System.out.println(warehouse.ProductsSortedByPrice());
+        System.out.println(warehouse.productsSortedByPrice());
 
         System.out.println("Grouped by product type and sorted by name:");
-        System.out.println(warehouse.ProductsGroupedAndSortedByName());
+        System.out.println(warehouse.productsGroupedAndSortedByName());
 
         System.out.println("Grouped by product type and sorted by price:");
-        System.out.println(warehouse.ProductsGroupedAndSortedByPrice());
+        System.out.println(warehouse.productsGroupedAndSortedByPrice());
 
         System.out.println("Food sorted by calorie:");
-        System.out.println(warehouse.FoodSortedByCalorie());
+        System.out.println(warehouse.foodSortedByCalorie());
 
         System.out.println("Appliance sorted by input power:");
-        System.out.println(warehouse.AppliancesSortedByInputPower());
+        System.out.println(warehouse.applianceSortedByInputPower());
 
         System.out.println("Clothes sorted by size:");
-        System.out.println(warehouse.ClothesSortedBySize());
+        System.out.println(warehouse.clothesSortedBySize());
 
         try {
             saveToFile(warehouse, "warehouse.json");
         } catch (IOException e) {
             logger.log(Level.WARNING, "Saving to file failed.");
-            e.printStackTrace();
         }
     }
 }

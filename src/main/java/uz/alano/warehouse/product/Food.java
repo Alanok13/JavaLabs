@@ -57,7 +57,7 @@ public class Food extends Product {
     public String toString() {
         String info = String.format("\n   Calories: %d   Creation: %s   Expiration: %d",
                 this.calorie,
-                this.creationDate,
+                this.creationDate.getTime(),
                 this.expirationTime);
 
         return super.toString() + info;
