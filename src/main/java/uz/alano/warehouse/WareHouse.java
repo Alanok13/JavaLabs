@@ -22,7 +22,8 @@ import java.util.stream.Collectors;
 public class Warehouse {
     private final static Logger LOGGER = Logger.getLogger(Warehouse.class.getSimpleName());
 
-    List<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
+    
     public List<Product> getProducts() {
         return products;
     }
