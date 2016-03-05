@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class Warehouse {
-    static Logger logger = Logger.getLogger(Warehouse.class.getSimpleName());
+    private final static Logger LOGGER = Logger.getLogger(Warehouse.class.getSimpleName());
 
     List<Product> products = new ArrayList<>();
     public List<Product> getProducts() {
@@ -139,7 +139,7 @@ public class Warehouse {
         try {
             warehouse = loadFromFile("warehouse.json");
         } catch (IOException e) {
-            logger.log(Level.INFO, "File not found.");
+            LOGGER.log(Level.INFO, "File not found.");
             warehouse = createDefaultWarehouse();
         }
 
@@ -167,7 +167,7 @@ public class Warehouse {
         try {
             saveToFile(warehouse, "warehouse.json");
         } catch (IOException e) {
-            logger.log(Level.WARNING, "Saving to file failed.");
+            LOGGER.log(Level.WARNING, "Saving to file failed.");
         }
     }
 }
