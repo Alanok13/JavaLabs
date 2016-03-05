@@ -1,8 +1,16 @@
 package uz.alano.warehouse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import uz.alano.warehouse.comparators.*;
-import uz.alano.warehouse.product.*;
+
+import uz.alano.warehouse.comparators.ApplianceComparatorByInputPower;
+import uz.alano.warehouse.comparators.ClothesComparatorBySize;
+import uz.alano.warehouse.comparators.FoodComparatorByCalorie;
+import uz.alano.warehouse.comparators.ProductComparatorByName;
+import uz.alano.warehouse.comparators.ProductComparatorByPrice;
+import uz.alano.warehouse.product.Product;
+import uz.alano.warehouse.product.Appliance;
+import uz.alano.warehouse.product.Clothes;
+import uz.alano.warehouse.product.Food;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +22,7 @@ import java.util.stream.Collectors;
 public class Warehouse {
     static Logger logger = Logger.getLogger(Warehouse.class.getSimpleName());
 
-    List<Product> products = new LinkedList<>();
+    List<Product> products = new ArrayList<>();
     public List<Product> getProducts() {
         return products;
     }
@@ -24,53 +32,59 @@ public class Warehouse {
     }
 
     public void add(Product p) {
-        this.products.add(p);
+        products.add(p);
     }
 
     public String foodSortedByCalorie() {
-        return this.sortedProduct(Food.class, new FoodComparatorByCalorie());
+        return sortedProduct(Food.class, new FoodComparatorByCalorie());
     }
 
     public String clothesSortedBySize() {
-        return this.sortedProduct(Clothes.class, new ClothesComparatorBySize());
+        return sortedProduct(Clothes.class, new ClothesComparatorBySize());
     }
 
     public String applianceSortedByInputPower() {
-        return this.sortedProduct(Appliance.class, new ApplianceComparatorByInputPower());
+        return sortedProduct(Appliance.class, new ApplianceComparatorByInputPower());
     }
 
-    public <T extends Product> String sortedProduct(Class<T> cl, Comparator<T> comparator) {
-        List<T> applianceList = this.groupProducts().get(cl)
+    public <T extends Product> String sortedProduct(Class<T> typeProduct, Comparator<T> comparator) {
+        List<T> applianceList = groupProducts().get(typeProduct)
                 .stream()
                 .map(p -> (T) p)
-                .collect(Collectors.toCollection(LinkedList::new));
+                .collect(Collectors.toCollection(ArrayList::new));
 
         applianceList.sort(comparator);
 
         return applianceList.toString();
     }
 
+    public String sortedProduct(Comparator<Product> comparator) {
+        products.sort(comparator);
+
+        return products.toString();
+    }
+
     public String productsSortedByName() {
-        return this.productsSorted(new ProductComparatorByName());
+        return sortedProduct(new ProductComparatorByName());
     }
 
     public String productsSortedByPrice() {
-        return this.productsSorted(new ProductComparatorByPrice());
+        return sortedProduct(new ProductComparatorByPrice());
     }
 
     public String productsGroupedAndSortedByName() {
-        return this.productsGroupedAndSorted(new ProductComparatorByName());
+        return productsGroupedAndSorted(new ProductComparatorByName());
     }
 
     public String productsGroupedAndSortedByPrice() {
-        return this.productsGroupedAndSorted(new ProductComparatorByPrice());
+        return productsGroupedAndSorted(new ProductComparatorByPrice());
     }
 
     private Map<Class, List<Product>> groupProducts() {
         Map<Class, List<Product>> groupedProducts = new HashMap<>();
-        for (Product p : this.products) {
+        for (Product p : products) {
             if (!groupedProducts.containsKey(p.getClass())) {
-                groupedProducts.put(p.getClass(), new LinkedList<>());
+                groupedProducts.put(p.getClass(), new ArrayList<>());
             }
 
             groupedProducts.get(p.getClass()).add(p);
@@ -79,14 +93,8 @@ public class Warehouse {
         return groupedProducts;
     }
 
-    private String productsSorted(Comparator<Product> comparator) {
-        this.products.sort(comparator);
-
-        return products.toString();
-    }
-
     private String productsGroupedAndSorted(Comparator<Product> comparator) {
-        Map<Class, List<Product>> groupedProducts = this.groupProducts();
+        Map<Class, List<Product>> groupedProducts = groupProducts();
 
         for (List<Product> list : groupedProducts.values()) {
             list.sort(comparator);
