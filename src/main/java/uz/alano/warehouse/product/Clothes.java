@@ -15,6 +15,8 @@ public class Clothes extends Product {
         if (size <= 0) {
             throw new IllegalArgumentException();
         }
+
+        this.size = size;
     }
 
     public String getMaterial(){
@@ -22,7 +24,7 @@ public class Clothes extends Product {
     }
 
     public void setMaterial(String material){
-        if (material == null || material.isEmpty()) {
+        if (material != null && !material.isEmpty()) {
             this.material = material;
         }
     }

@@ -30,6 +30,8 @@ public class Food extends Product {
         if (date == null || date.after(GregorianCalendar.getInstance())) {
             throw new IllegalArgumentException();
         }
+
+        this.creationDate = date;
     }
 
     public int getExpirationTime() {
@@ -44,7 +46,6 @@ public class Food extends Product {
         this.expirationTime = expirationTime;
     }
 
-    public Food(){}
     public Food(long ean, double price, String name, int calorie, GregorianCalendar creationDate, int expirationTime) {
         super(ean, price, name);
 
