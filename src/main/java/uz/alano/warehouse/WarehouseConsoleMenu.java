@@ -17,7 +17,7 @@ public class WarehouseConsoleMenu {
     private final static Logger LOGGER = Logger.getLogger(Warehouse.class.getSimpleName());
     private Scanner in = new Scanner(System.in);
     private ReportService reportService;
-
+    private Warehouse warehouse;
     public ReportService getReportService() {
         return reportService;
     }
@@ -33,7 +33,8 @@ public class WarehouseConsoleMenu {
                 "\n3 - Create warehouse with default content");
         switch (in.nextByte()) {
             case 1: {
-                this.reportService = new DefaultReportService(new Warehouse());
+                warehouse = new Warehouse();
+                reportService = new DefaultReportService(warehouse);
 
                 break;
             }
@@ -41,7 +42,8 @@ public class WarehouseConsoleMenu {
                 while (true) {
                     System.out.println("Enter path to file: ");
                     try {
-                        this.reportService = new DefaultReportService(Warehouse.loadFromFile(in.next()));
+                        warehouse = Warehouse.loadFromFile(in.next());
+                        reportService = new DefaultReportService(warehouse);
                     } catch (IOException e) {
                         System.out.println("Incorrect path. Try again.");
                         continue;
@@ -86,15 +88,15 @@ public class WarehouseConsoleMenu {
                     "\n6 - Exit");
             switch (in.nextByte()) {
                 case 1: {
-                    this.reportService.getWarehouse().add(createProductMenu());
+                    warehouse.add(createProductMenu());
                     break;
                 }
                 case 2: {
-                    reportService.getWarehouse().remove(removeProductsMenu());
+                    warehouse.remove(removeProductsMenu());
                     break;
                 }
                 case 3: {
-                    System.out.println(reportService.getWarehouse().getProducts());
+                    System.out.println(warehouse.getProducts());
                     break;
                 }
                 case 4: {
@@ -116,7 +118,7 @@ public class WarehouseConsoleMenu {
         System.out.print("Enter file name:");
         String name = in.next();
         try {
-            Warehouse.saveToFile(reportService.getWarehouse(), name);
+            Warehouse.saveToFile(warehouse, name);
         }
         catch (IOException e){
             LOGGER.log(Level.WARNING, "Saving to file failed.");

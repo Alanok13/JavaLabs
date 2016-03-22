@@ -15,12 +15,10 @@ import java.util.stream.Collectors;
 
 public class DefaultReportService implements ReportService {
 
-    @Override
     public Warehouse getWarehouse() {
         return warehouse;
     }
 
-    @Override
     public void setWarehouse(Warehouse warehouse) {
         this.warehouse = warehouse;
     }

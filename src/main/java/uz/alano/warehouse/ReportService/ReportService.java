@@ -1,11 +1,6 @@
 package uz.alano.warehouse.ReportService;
 
-import uz.alano.warehouse.Warehouse;
-
 public interface ReportService {
-    Warehouse getWarehouse();
-
-    void setWarehouse(Warehouse warehouse);
 
     String foodSortedByCalorie();
 
