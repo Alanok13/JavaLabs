@@ -1,5 +1,7 @@
 package uz.alano.warehouse;
 
+import uz.alano.warehouse.ReportService.DefaultReportService;
+import uz.alano.warehouse.ReportService.ReportService;
 import uz.alano.warehouse.product.Appliance;
 import uz.alano.warehouse.product.Clothes;
 import uz.alano.warehouse.product.Food;
@@ -31,7 +33,7 @@ public class WarehouseConsoleMenu {
                 "\n3 - Create warehouse with default content");
         switch (in.nextByte()) {
             case 1: {
-                this.reportService = new ReportService(new Warehouse());
+                this.reportService = new DefaultReportService(new Warehouse());
 
                 break;
             }
@@ -39,7 +41,7 @@ public class WarehouseConsoleMenu {
                 while (true) {
                     System.out.println("Enter path to file: ");
                     try {
-                        this.reportService = new ReportService(Warehouse.loadFromFile(in.next()));
+                        this.reportService = new DefaultReportService(Warehouse.loadFromFile(in.next()));
                     } catch (IOException e) {
                         System.out.println("Incorrect path. Try again.");
                         continue;
@@ -68,7 +70,7 @@ public class WarehouseConsoleMenu {
                 warehouse.add(new Clothes(14, 350, "Jeans", (byte) 44, "Denim"));
                 warehouse.add(new Clothes(15, 250, "Pullover", (byte) 35, "Wool"));
 
-                this.reportService = new ReportService(warehouse);
+                this.reportService = new DefaultReportService(warehouse);
             }
         }
     }

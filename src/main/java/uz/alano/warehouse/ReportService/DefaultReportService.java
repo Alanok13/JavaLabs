@@ -1,5 +1,6 @@
-package uz.alano.warehouse;
+package uz.alano.warehouse.ReportService;
 
+import uz.alano.warehouse.Warehouse;
 import uz.alano.warehouse.comparators.*;
 import uz.alano.warehouse.product.Appliance;
 import uz.alano.warehouse.product.Clothes;
@@ -12,46 +13,55 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ReportService {
+public class DefaultReportService implements ReportService {
 
+    @Override
     public Warehouse getWarehouse() {
         return warehouse;
     }
 
+    @Override
     public void setWarehouse(Warehouse warehouse) {
         this.warehouse = warehouse;
     }
 
     private Warehouse warehouse;
 
-    public ReportService(Warehouse warehouse) {
+    public DefaultReportService(Warehouse warehouse) {
         this.warehouse = warehouse;
     }
 
+    @Override
     public String foodSortedByCalorie() {
         return sortedProduct(Food.class, new FoodComparatorByCalorie());
     }
 
+    @Override
     public String clothesSortedBySize() {
         return sortedProduct(Clothes.class, new ClothesComparatorBySize());
     }
 
+    @Override
     public String applianceSortedByInputPower() {
         return sortedProduct(Appliance.class, new ApplianceComparatorByInputPower());
     }
 
+    @Override
     public String productsSortedByName() {
         return sortedProduct(new ProductComparatorByName());
     }
 
+    @Override
     public String productsSortedByPrice() {
         return sortedProduct(new ProductComparatorByPrice());
     }
 
+    @Override
     public String productsGroupedAndSortedByName() {
         return productsGroupedAndSorted(new ProductComparatorByName());
     }
 
+    @Override
     public String productsGroupedAndSortedByPrice() {
         return productsGroupedAndSorted(new ProductComparatorByPrice());
     }
