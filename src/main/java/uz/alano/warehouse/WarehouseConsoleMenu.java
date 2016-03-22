@@ -72,7 +72,7 @@ public class WarehouseConsoleMenu {
                 warehouse.add(new Clothes(14, 350, "Jeans", (byte) 44, "Denim"));
                 warehouse.add(new Clothes(15, 250, "Pullover", (byte) 35, "Wool"));
 
-                this.reportService = new DefaultReportService(warehouse);
+                reportService = new DefaultReportService(warehouse);
             }
         }
     }

@@ -7,7 +7,7 @@ public class Appliance extends Product {
     private int inputPower;
 
     public int getInputPower(){
-        return this.inputPower;
+        return inputPower;
     }
 
     public void setInputPower(int inputPower){
@@ -26,7 +26,7 @@ public class Appliance extends Product {
 
     @Override
     public String toString() {
-        String info = String.format("\n   Input power: %d", this.inputPower);
+        String info = String.format("\n   Input power: %d", inputPower);
 
         return super.toString() + info;
     }

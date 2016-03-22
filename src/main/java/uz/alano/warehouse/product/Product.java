@@ -15,7 +15,7 @@ public abstract class Product {
     private String name;
 
     public long getEan(){
-        return this.ean;
+        return ean;
     }
 
     public void setEan(long ean) {
@@ -27,7 +27,7 @@ public abstract class Product {
     }
 
     public double getPrice(){
-        return this.price;
+        return price;
     }
 
     public void setPrice(double price){
@@ -39,7 +39,7 @@ public abstract class Product {
     }
 
     public String getName(){
-        return this.name;
+        return name;
     }
 
     public void setName(String name){
@@ -59,10 +59,6 @@ public abstract class Product {
 
     @Override
     public String toString() {
-        return String.format("\n-----------------\n"
-                + "   EAN: %d   Name: %s   Price: %f",
-                this.ean,
-                this.name,
-                this.price);
+        return String.format("\n-----------------\n   EAN: %d   Name: %s   Price: %f", ean, name, price);
     }
 }

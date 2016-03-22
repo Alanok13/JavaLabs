@@ -8,7 +8,7 @@ public class Clothes extends Product {
     private String material;
 
     public byte getSize(){
-        return this.size;
+        return size;
     }
 
     public void setSize(byte size){
@@ -20,7 +20,7 @@ public class Clothes extends Product {
     }
 
     public String getMaterial(){
-        return this.material;
+        return material;
     }
 
     public void setMaterial(String material){
@@ -39,9 +39,7 @@ public class Clothes extends Product {
 
     @Override
     public String toString() {
-        String info = String.format("\n   Size: %d   Material: %s",
-                this.size,
-                this.material);
+        String info = String.format("\n   Size: %d   Material: %s", size, material);
 
         return super.toString() + info;
     }

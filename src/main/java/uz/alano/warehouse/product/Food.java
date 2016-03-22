@@ -11,7 +11,7 @@ public class Food extends Product {
     private int expirationTime;
 
     public int getCalorie() {
-        return this.calorie;
+        return calorie;
     }
 
     public void setCalorie(int calorie) {
@@ -23,7 +23,7 @@ public class Food extends Product {
     }
 
     public GregorianCalendar getCreationDate() {
-        return this.creationDate;
+        return creationDate;
     }
 
     public void setCreationDate(GregorianCalendar date) {
@@ -35,7 +35,7 @@ public class Food extends Product {
     }
 
     public int getExpirationTime() {
-        return this.expirationTime;
+        return expirationTime;
     }
 
     public void setExpirationTime(int expirationTime) {
@@ -46,6 +46,7 @@ public class Food extends Product {
         this.expirationTime = expirationTime;
     }
 
+    public Food(){}
     public Food(long ean, double price, String name, int calorie, GregorianCalendar creationDate, int expirationTime) {
         super(ean, price, name);
 
@@ -57,9 +58,9 @@ public class Food extends Product {
     @Override
     public String toString() {
         String info = String.format("\n   Calories: %d   Creation: %s   Expiration: %d",
-                this.calorie,
-                this.creationDate.getTime(),
-                this.expirationTime);
+                calorie,
+                creationDate.getTime(),
+                expirationTime);
 
         return super.toString() + info;
     }

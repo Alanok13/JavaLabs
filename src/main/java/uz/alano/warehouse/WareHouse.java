@@ -65,20 +65,4 @@ public class Warehouse {
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(new File(path), warehouse);
     }
-
-//    public static void main(String[] args) {
-//        Warehouse warehouse;
-//        try {
-//            warehouse = loadFromFile("warehouse.json");
-//        } catch (IOException e) {
-//
-//            warehouse = createDefaultWarehouse();
-//        }
-//
-//        try {
-//            saveToFile(warehouse, "warehouse.json");
-//        } catch (IOException e) {
-//
-//        }
-//    }
 }
