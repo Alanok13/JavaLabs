@@ -88,11 +88,13 @@ public class WarehouseConsoleMenu {
                     "\n6 - Exit");
             switch (in.nextByte()) {
                 case 1: {
-                    warehouse.add(createProductMenu());
+                    //TODO: Отчет о удалении
+                    createProductMenu();
                     break;
                 }
                 case 2: {
-                    warehouse.remove(removeProductsMenu());
+                    //TODO: Отчет о удалении
+                    removeProductsMenu();
                     break;
                 }
                 case 3: {
@@ -221,12 +223,12 @@ public class WarehouseConsoleMenu {
             }
         }
 
-        return product;
+        warehouse.add(product);
     }
 
-    private String removeProductsMenu() {
+    private boolean removeProductsMenu() {
         System.out.print("Input product name: ");
 
-        return (in.next());
+        return warehouse.remove(in.next();
     }
 }
