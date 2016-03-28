@@ -88,13 +88,11 @@ public class WarehouseConsoleMenu {
                     "\n6 - Exit");
             switch (in.nextByte()) {
                 case 1: {
-                    //TODO: Отчет о удалении
                     createProductMenu();
                     break;
                 }
                 case 2: {
-                    //TODO: Отчет о удалении
-                    removeProductsMenu();
+                    System.out.println("Product" + (removeProductsMenu() ? " removed" : "not found"));
                     break;
                 }
                 case 3: {
@@ -171,7 +169,7 @@ public class WarehouseConsoleMenu {
         }
     }
 
-    private Product createProductMenu() {
+    private void createProductMenu() {
         System.out.println("Change product type: " +
                 "\n1 - Appliance" +
                 "\n2 - Clothes" +
@@ -229,6 +227,6 @@ public class WarehouseConsoleMenu {
     private boolean removeProductsMenu() {
         System.out.print("Input product name: ");
 
-        return warehouse.remove(in.next();
+        return warehouse.remove(in.next());
     }
 }

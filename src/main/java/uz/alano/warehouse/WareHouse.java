@@ -28,9 +28,9 @@ public class Warehouse {
 
     public boolean remove(String name){
         Product selectedProduct = null;
-        for (Product p : products){
-            if (p.getName().equals(name)){
-                selectedProduct = p;
+        for (Product product : products){
+            if (product.getName().equals(name)){
+                selectedProduct = product;
             }
         }
 
@@ -45,12 +45,12 @@ public class Warehouse {
 
     public Map<Class, List<Product>> groupProducts() {
         Map<Class, List<Product>> groupedProducts = new HashMap<>();
-        for (Product p : products) {
-            if (!groupedProducts.containsKey(p.getClass())) {
-                groupedProducts.put(p.getClass(), new ArrayList<>());
+        for (Product product : products) {
+            if (!groupedProducts.containsKey(product.getClass())) {
+                groupedProducts.put(product.getClass(), new ArrayList<>());
             }
 
-            groupedProducts.get(p.getClass()).add(p);
+            groupedProducts.get(product.getClass()).add(product);
         }
 
         return groupedProducts;
